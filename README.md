@@ -23,7 +23,7 @@ If you forget this step, you can later run it in the command line.
 
 The initialization files were generated with /scripts/init_conf.py. These generated data files are included in /lammps-input/data/ if you want to skip this step.
 
-The LAMMPS input files under 'lammps-input/' define the simulation parameters. I used in.nvt-general-rdf-harmonic and in.nvt-general-rdf-fene
+The LAMMPS input files under 'lammps-input/' define the simulation parameters. I used in.nvt-general-rdf (harmonic) and in.nvt-general-rdf-fene
 which define NVT simulations from a file for inital configurations. These input files take command line prompts for confFileName, T_target, mySeed, nRdfBins, rdfCutoff tag, and prodSteps. Here is an example of how you could run one simulation from the command line:
   lmp -in ../lammps-input/in.nvt-general-rdf -v confFileName ../lammps-input/data/polymer_N20.data -v T_target 0.5 -v mySeed 2024 -v nRdfBins 100 -v rdfCutoff 5.0 -v tag N20T0.5 -v prodSteps 1000000
 
