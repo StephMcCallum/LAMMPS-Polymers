@@ -29,6 +29,7 @@ which define NVT simulations from a file for inital configurations. These input 
 
 For running parameter sweeps, the above command in included in a sbatch file under slurm-batch-scripts/submit-job-fene.sh and submit-job-harm.sh. On a GPU node of the terminal (after running 'module load lammps_gpu') you can submit this to run 16 jobs each, 4N X 4T, through the command:
   sbatch submit-job-fene.sh
+  sbatch submit-job-harn.sh
 
 Once done running, you can check for equillibration using the equillibration notebook under scripts/. If the the systems has not equillibrated, you must run longer. You will need to update with the direct filepath to your data. You can also run the analysis notebooks.
 
