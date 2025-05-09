@@ -2,12 +2,13 @@
 units lj		# Units for quantities. (lj = reduced units)
 atom_style bond	# What features does each atom have?
 boundary p p p 		# Boundary conditions in each dimension.
-pair_style lj/cut 2.5
+
+bond_style fene
+pair_style lj/cut 1.12246
 read_data ${confFileName}
+bond_coeff 1 30.0 1.5 1.0 1.0
 pair_modify shift yes
-pair_coeff 1 1 1.0 1.0 2.5
-bond_style harmonic
-bond_coeff * 80.0 1.2
+pair_coeff * * 1.0 1.0 1.12246
 
 # Integration details,
 mass 1 1.0
@@ -34,10 +35,6 @@ variable myPress equal press
 variable myTemp equal temp
 fix thAvgFix all ave/time 10 100 1000 v_myPE v_myKE v_myTE v_myPress v_myTemp file ${tag}-T${T_target}-thermo.txt 
 dump myDump all atom 100 traj_${tag}.lammpstrj
-
-# Save the final configuration.
-write_data restart${tag}.dat.out
-
 #Production run
 run ${prodSteps}
 

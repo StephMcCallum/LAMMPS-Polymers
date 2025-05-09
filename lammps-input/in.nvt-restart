@@ -2,8 +2,10 @@
 units lj		# Units for quantities. (lj = reduced units)
 atom_style bond	# What features does each atom have?
 boundary p p p 		# Boundary conditions in each dimension.
+
+read_data restart${tag}.dat.out
+
 pair_style lj/cut 2.5
-read_data ${confFileName}
 pair_modify shift yes
 pair_coeff 1 1 1.0 1.0 2.5
 bond_style harmonic
@@ -18,13 +20,13 @@ thermo 100
 # Compute the RDF
 comm_modify mode single cutoff 6
 compute myRDF all rdf ${nRdfBins} cutoff ${rdfCutoff} 
-fix rdfAvgFix all ave/time 20 1 20 c_myRDF[*] ave running file ${tag}-T${T_target}.rdf overwrite  mode vector
+fix rdfAvgFix all ave/time 20 1 20 c_myRDF[*] ave running file ${tag}-T${T_target}restart.rdf overwrite  mode vector
 
 compute rg all gyration
-fix rg_out all ave/time 100 1 100 c_rg file rg_${tag}.dat
+fix rg_out all ave/time 100 1 100 c_rg file rg_${tag}restart.dat
 
 compute msd all msd
-fix msd_out all ave/time 100 1 100 c_msd[4] file msd_${tag}.dat
+fix msd_out all ave/time 100 1 100 c_msd[4] file msd_${tag}restart.dat
 
 # the potential energy and pressure
 variable myPE equal pe
@@ -32,11 +34,11 @@ variable myKE equal ke
 variable myTE equal etotal
 variable myPress equal press
 variable myTemp equal temp
-fix thAvgFix all ave/time 10 100 1000 v_myPE v_myKE v_myTE v_myPress v_myTemp file ${tag}-T${T_target}-thermo.txt 
-dump myDump all atom 100 traj_${tag}.lammpstrj
+fix thAvgFix all ave/time 10 100 1000 v_myPE v_myKE v_myTE v_myPress v_myTemp file ${tag}-T${T_target}-thermorestart.txt 
+dump myDump all atom 100 traj_${tag}restart.lammpstrj
 
 # Save the final configuration.
-write_data restart${tag}.dat.out
+write_data restart${tag}restart.dat.out
 
 #Production run
 run ${prodSteps}
