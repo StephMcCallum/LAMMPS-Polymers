@@ -11,8 +11,6 @@
 
 module load lammps_gpu
 export OMP_NUM_THREADS=4
-#mpirun -np 1 -npernode 4 gmx_mpi ...
-#mpirun -np 1 -npernode 4 lmp -sf gpu -pk gpu 1 -in in.nvt -v T_target 2.0 -v tag numDen 0.02
 
 lmp -in ../lammps-input/in.nvt-general-rdf -v confFileName ../lammps-input/data/polymer_N20.data -v T_target 0.5 -v mySeed 2024 -v nRdfBins 100 -v rdfCutoff 5.0 -v tag N20T0.5 -v prodSteps 1000000
 lmp -in ../lammps-input/in.nvt-general-rdf -v confFileName ../lammps-input/data/polymer_N20.data -v T_target 1.0 -v mySeed 2024 -v nRdfBins 100 -v rdfCutoff 5.0 -v tag N20T1.0 -v prodSteps 1000000
@@ -30,7 +28,4 @@ lmp -in ../lammps-input/in.nvt-general-rdf -v confFileName ../lammps-input/data/
 lmp -in ../lammps-input/in.nvt-general-rdf -v confFileName ../lammps-input/data/polymer_N200.data -v T_target 1.0 -v mySeed 2024 -v nRdfBins 100 -v rdfCutoff 5.0 -v tag N200T1.0 -v prodSteps 10000000
 lmp -in ../lammps-input/in.nvt-general-rdf -v confFileName ../lammps-input/data/polymer_N200.data -v T_target 1.5 -v mySeed 2024 -v nRdfBins 100 -v rdfCutoff 5.0 -v tag N200T1.5 -v prodSteps 10000000
 lmp -in ../lammps-input/in.nvt-general-rdf -v confFileName ../lammps-input/data/polymer_N200.data -v T_target 2.0 -v mySeed 2024 -v nRdfBins 100 -v rdfCutoff 5.0 -v tag N200T2.0 -v prodSteps 10000000
-#lmp -in ../lammps-input/in.nvt-general-rdf -v confFileName polymer_rho0.02x2.data -v T_target 1.0 -v mySeed 2024 -v nRdfBins 100 -v rdfCutoff 5.0 -v tag prod-rho0.02 -v prodSteps 10000
-
-#lmp -in ../lammps-input/in.nvt-general-rdf -v confFileName polymer_rho0.02x2.data -v T_target 0.2 -v mySeed 2024 -v nRdfBins 100 -v rdfCutoff 5.0 -v tag prod-rho0.02 -v prodSteps 10000
 
